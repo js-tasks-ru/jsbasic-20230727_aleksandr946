@@ -1,5 +1,4 @@
 function ucFirst(str) {
-  // ваш код...
   if (str.length === 0) { 
     return str;
   } else { 
