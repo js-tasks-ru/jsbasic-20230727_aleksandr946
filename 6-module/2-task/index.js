@@ -28,47 +28,19 @@ export default class ProductCard {
     elem.querySelector('.card__price').textContent = '€' + this.product.price.toFixed(2);
     elem.querySelector('.card__title').textContent = this.product.name;
       
-    elem.querySelector('.card__button').addEventListener('click', (event) => {
+    elem.querySelector('.card__button').addEventListener('click', () => {
       //console.log('кликкк');
       let addProduct = new CustomEvent('product-add', {
         detail: this.product.id,
         bubbles: true,
       });
-      event.target.dispatchEvent(addProduct);
+      elem.dispatchEvent(addProduct);
     });
 
-    elem.closest('.card').addEventListener('product-add', ()=>{
+    elem.addEventListener('product-add', ()=>{
       console.log(this.product.id);
     });
 
     return elem;
   }	
 }
-
-
-
-/* 
-  addProduct() {
-      let productAdd = new CustomEvent("product-add", { // имя события должно быть именно "product-add"
-        detail: this.elem.product.id, // Уникальный идентификатора товара из объекта товара
-        bubbles: true // это событие всплывает - это понадобится в дальнейшем
-      });
-      this.elem.dispatchEvent(productAdd);
-    };
-  } 
-} */
-
-
-/* addProduct() {
-  this.addEventListener('click', () => {
-    let productAdd = new CustomEvent("product-add", { // имя события должно быть именно "product-add"
-      detail: this.elem.product.id, // Уникальный идентификатора товара из объекта товара
-      bubbles: true // это событие всплывает - это понадобится в дальнейшем
-    });
-    this.elem.dispatchEvent(productAdd);
-  });
-
-  this.addEventListener(productAdd, () => {
-    alert("Товар добавлен");
-  });
-} */
