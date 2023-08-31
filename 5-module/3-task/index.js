@@ -4,30 +4,37 @@ function initCarousel() {
   leftArrow.style.display = 'none';
   const carouselInner = document.querySelector('.carousel__inner');
   let carouselInnerWidth = 0;
-  let carouselSlide = document.querySelector('.carousel__slide').offsetWidth;
+  let carouselSlideWidth = document.querySelector('.carousel__slide').offsetWidth;
   let slidesAmount = carouselInner.children.length;
-  let numOfSlide = 1;
+  let slideNo = 1;
 
   function rightArrowMove () {
-    if (numOfSlide < slidesAmount) {
+    if (slideNo < slidesAmount) {
       leftArrow.style.display = '';
-      carouselInner.style.transform = 'translateX(' + (carouselInnerWidth - carouselSlide) + 'px)';
-      carouselInnerWidth = carouselInnerWidth - carouselSlide;
-      numOfSlide++;
-      if (numOfSlide == slidesAmount) {rightArrow.style.display = 'none';}
+      carouselInner.style.transform = 'translateX(' + (carouselInnerWidth - carouselSlideWidth) + 'px)';
+      carouselInnerWidth = carouselInnerWidth - carouselSlideWidth;
+      slideNo++;
+      if (slideNo == slidesAmount) {rightArrow.style.display = 'none';}
     }
   }
 
   function leftArrowMove () {
-    if (numOfSlide > 1) {
+    if (slideNo > 1) {
       rightArrow.style.display = '';
-      carouselInner.style.transform = 'translateX(' + (carouselInnerWidth + carouselSlide) + 'px)';
-      carouselInnerWidth = carouselInnerWidth + carouselSlide;
-      numOfSlide--;
-      if (numOfSlide == 1) {leftArrow.style.display = 'none';}
+      carouselInner.style.transform = 'translateX(' + (carouselInnerWidth + carouselSlideWidth) + 'px)';
+      carouselInnerWidth = carouselInnerWidth + carouselSlideWidth;
+      slideNo--;
+      if (slideNo == 1) {leftArrow.style.display = 'none';}
     }
+  }
+
+  function resizeFunc () {
+    carouselSlideWidth = document.querySelector('.carousel__slide').offsetWidth;
+    carouselInnerWidth = -(slideNo - 1) * carouselSlideWidth;
+    carouselInner.style.transform = 'translateX(' + (-(slideNo - 1) * carouselSlideWidth) + 'px)';
   }
 
   rightArrow.addEventListener('click', rightArrowMove);
   leftArrow.addEventListener('click', leftArrowMove);
+  window.onresize = resizeFunc;
 }
