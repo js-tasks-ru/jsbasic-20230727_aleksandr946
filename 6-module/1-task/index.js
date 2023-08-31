@@ -51,7 +51,7 @@ export default class UserTable {
   }	
 
   removeTr() {
-    document.addEventListener('click', function(event) { 
+    this.elem.addEventListener('click', function(event) { 
       if (event.target.closest('button')) {
         event.target.closest('tr').remove();
       }
