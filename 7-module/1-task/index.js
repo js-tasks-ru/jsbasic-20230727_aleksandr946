@@ -27,36 +27,34 @@ export default class RibbonMenu {
     let ribbonInner = elem.querySelector('.ribbon__inner');
     let ribbonArrowLeft = elem.querySelector('.ribbon__arrow_left').closest('button');
     let ribbonArrowRight = elem.querySelector('.ribbon__arrow_right').closest('button');
-    
 
-    elem.addEventListener('click', function (e) {
+    ribbonArrowRight.addEventListener('click', function () {
       let scrollWidth = ribbonInner.scrollWidth;
       let clientWidth = ribbonInner.clientWidth;
       let scrollLeft = ribbonInner.scrollLeft;
       let scrollRight = scrollWidth - scrollLeft - clientWidth;
-
-      if (e.target.classList.contains('ribbon__arrow_right')) { 
-        ribbonInner.scrollBy(350, 0); 
-        ribbonArrowLeft.classList.add('ribbon__arrow_visible');
-        if (scrollRight <= 1) {
-          ribbonArrowRight.classList.remove('ribbon__arrow_visible');
-        }
+      ribbonInner.scrollBy(350, 0);
+      ribbonArrowLeft.classList.add('ribbon__arrow_visible');
+      if (scrollRight <= 1) {
+        this.classList.remove('ribbon__arrow_visible');
       }
+    });
 
-      if (e.target.classList.contains('ribbon__arrow_left')) { 
-        ribbonInner.scrollBy(-350, 0); 
-        ribbonArrowRight.classList.add('ribbon__arrow_visible');
-        if (scrollLeft <= 1) {
-          (ribbonArrowLeft.classList.remove('ribbon__arrow_visible'));
-        }
+    ribbonArrowLeft.addEventListener('click', function () {
+      let scrollWidth = ribbonInner.scrollWidth;
+      let clientWidth = ribbonInner.clientWidth;
+      let scrollLeft = ribbonInner.scrollLeft;
+      ribbonInner.scrollBy(-350, 0); 
+      ribbonArrowRight.classList.add('ribbon__arrow_visible');
+      if (scrollLeft <= 1) {
+        (this.classList.remove('ribbon__arrow_visible'));
       }
     });
 
 
     ribbonInner.addEventListener('click', function(e) {
-      let a = ribbonInner.querySelectorAll('a');
+      ribbonInner.querySelectorAll('a').forEach(e => e.classList.remove('ribbon__item_active'));
       e.preventDefault();
-      a.forEach(e => e.classList.remove('ribbon__item_active'));
 
       if (e.target.classList.contains('ribbon__item')) {
         e.target.classList.add('ribbon__item_active');
@@ -73,6 +71,7 @@ export default class RibbonMenu {
 
     ribbonInner.addEventListener('product-add', (e)=>{
       console.log(e.detail);
+      return e.detail;
     });
 
     
