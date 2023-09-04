@@ -28,6 +28,7 @@ export default class RibbonMenu {
     let ribbonArrowLeft = elem.querySelector('.ribbon__arrow_left').closest('button');
     let ribbonArrowRight = elem.querySelector('.ribbon__arrow_right').closest('button');
     
+
     elem.addEventListener('click', function (e) {
       let scrollWidth = ribbonInner.scrollWidth;
       let clientWidth = ribbonInner.clientWidth;
@@ -51,6 +52,7 @@ export default class RibbonMenu {
       }
     });
 
+
     ribbonInner.addEventListener('click', function(e) {
       let a = ribbonInner.querySelectorAll('a');
       e.preventDefault();
@@ -68,10 +70,12 @@ export default class RibbonMenu {
       }
     });
 
+
     ribbonInner.addEventListener('product-add', (e)=>{
       console.log(e.detail);
     });
 
+    
     return elem;
   }  
 }
