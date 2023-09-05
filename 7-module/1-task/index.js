@@ -51,30 +51,25 @@ export default class RibbonMenu {
       }
     });
 
-
     ribbonInner.addEventListener('click', function(e) {
       ribbonInner.querySelectorAll('a').forEach(e => e.classList.remove('ribbon__item_active'));
       e.preventDefault();
 
       if (e.target.classList.contains('ribbon__item')) {
         e.target.classList.add('ribbon__item_active');
-            
-        let addProduct = new CustomEvent('product-add', {
+
+        let addProduct = new CustomEvent('ribbon-select', {
           detail: e.target.dataset.id,
           bubbles: true,
         });
-
         ribbonInner.dispatchEvent(addProduct);
       }
     });
 
-
-    ribbonInner.addEventListener('product-add', (e)=>{
+    ribbonInner.addEventListener('ribbon-select', (e)=>{
       console.log(e.detail);
-      return e.detail;
     });
 
-    
     return elem;
   }  
 }
